@@ -1,3 +1,6 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+showAuthor:
+    path: /showAuthor/{name}
+    controller: App\Controller\AuthorController::showAuthor

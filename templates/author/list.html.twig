@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title> Documents </title>
+    </head>
+    <body>
+    <!--Afficher le nombre des auteurs-->
+        <h1>le nombres des auteurs est : {{ a | length }}</h1>
+        <table border="1">
+        <tr>
+            <th>id</th>
+            <th>picture</th>
+            <th>username</th>
+            <th>email</th>
+            <th>nb_books</th>
+            <th>autres</th>
+            
+        </tr>
+        {% for a in a %}
+            <tr>
+                <td>{{ a.id }}</td>
+                <td><img src="{{ a.picture }}" alt="Photo de l'auteur"></td>
+                
+                <!--Ajouter un lien « details » devant chaque auteur-->
+                <td>
+                    <!--afficher les noms en majuscules-->
+                    <a href="{{ path('showAuthor', {'name': a.username | upper}) }}">{{ a.username | upper }}</a>
+                </td>
+                
+                <td>{{ a.email }}</td>
+                <td>{{ a.nb_books }}</td>
+
+                <!--Ajouter un lien « details » devant chaque auteur-->
+                <td>
+                    <a href="{{ path('showAuthor', {'name': a.username}) }}">Détails</a>
+                </td>
+
+            </tr>
+        <!--une condition dans le cas où le tableau n’est pas défini et/ou vide.-->
+        {% else %}
+            <h1>Tableau vide</h1>
+        {% endfor %}
+        </table>
+
+        <!--Afficher le nombre total des livres de tous les auteurs.-->
+        {% set nbTotal = 0 %}
+        {% for a in a %}
+            {% set nbTotal = nbTotal + a.nb_books %}
+        {% endfor %}
+        <p>le nombre totales des livres de tous les autheurs est: {{ nbTotal}}
+
+    </body>
+</html>
